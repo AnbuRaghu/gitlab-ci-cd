@@ -1,0 +1,42 @@
+ci-cd pipeline concept works in following order
+
+* Run tests
+* build docker Image
+* push to docker registry
+* deploy to server
+
+
+Pipeline configuration file
+---------------------------------
+How do we create a gitlab ci-cd pipeline??
+pipeline is scripted means pipeline is written in code and hosted inside applications's git repository
+
+whole CI/CD configuration is written in YAML format and that file should be called as .gitlab-ci.yml.. it should be in route folder
+
+the tasks in he ci-cd pipeline for example these 4 steps and etc. are called as jobs..
+jobs are the fundamental building block of a .gitlab-ci.yml file
+
+
+let's create a job which runs test
+
+run_tests: name of the test
+  image: python:3.9-slim-buster
+  script: must contain atleast the script clause
+    - make test : we say run this command
+
+
+    here is questioned where and which environment is the job executed??
+    pipline jobs are executed in gitlab runners.gitlab runners can be installed in different environment it could be linux windows mac
+    executer :
+    executer determines the environment each jobs runs in
+    for example shell is he simplest executor but another commen execution environment on gitlab is docker container  using docker commands are executed inside container
+
+
+
+    // docker image name we ovewrite default gitlab image normally gitlab uses ruby image...now this image make sure python and pip package available inside container.how ever we still don't have make command.to install make command inside python image  before the script runs, we need toadd a nother attribute before_script.. . this is the command that should run before script command
+
+
+job 2: build docker image and push
+
+variables for login credentials
+to pull and push we need docker hub credentials we should not include it inside .gitlab-ci.ya´ml because it's visible we have a seperete section called setting and inside we have also ci-cd iotion there we have several option on eof those is variable there we need to setup variables for credentials basically it would be handled by admin
