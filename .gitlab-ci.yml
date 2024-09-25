@@ -1,7 +1,7 @@
 variables:
   IMAGE_NAME: nanajanashia/demo-app
   IMAGE_TAG: python-app-1.0
-
+//here we set the orderof the pipelines
 stages:
   - test
   - build
